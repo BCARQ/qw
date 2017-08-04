@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>vue轮播组件</title>
+		<script type="text/javascript" src="vueyanfa.js"></script>
+        <script type="text/javascript" src="swiper-3.4.2.min.js"> </script>
+       <link rel="stylesheet" type="text/css" href="swiper-3.4.2.min.css"/>
+        <script type="text/javascript" src="模板.js">  </script>	       	
+      <iframe name="hh" frameborder="0"></iframe>
+       <a href="http://www.baidu.com" target="hh">.....</a>
+       <style>
+       	
+    #demo .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s
+}
+ #demo .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+  opacity: 0 ;position: r;
+}
+       </style>
+	</head>
+
+	<body>
+		<!--
+		vue-轮播组件：
+		*1，可以更换图片路径；
+		*2，设置宽高；
+		？3，小雨滴；
+		4，轮播方向；
+		5，点击效果；
+		6，
+		
+	-->
+	<div class="wrap"> <div class="last"> &gt;</div><div class="next">&lt;</div><div class="btn"><div></div></div><div class="middle"><a href=""><img src=""/></a></div>
+  
+   
+     
+     
+      
+     
+   </div>
+
+
+		<div id="app" style="width: 800px;">
+               <swiper height="200px" width="100%" :url="src" rain="true"></swiper>
+		</div>
+		<div id="gg">
+               <swiper height="200px" width="100%" :url="src"></swiper>
+		</div>
+		
+		<table border="" cellspacing="" cellpadding="">
+			<tr >
+				<th colspan="" rowspan="">Header</th>
+			</tr>
+			<tr><td>Data</td></tr>
+		</table>
+		<ul>
+			<li></li>
+		</ul>
+<ol type="i" start="i" reversed="reversed">
+	<li>
+		1
+	</li>
+	<li>
+		2
+	</li><li>
+		3
+	</li>
+</ol>
+<!--<div id="demo">
+  <button v-on:click="show = !show">
+    Toggle
+  </button>
+  <transition name="fade">
+    <p v-if="show">hello</p>
+  </transition>
+</div>
+		-->
+		<div id="rr">
+
+			<inp v-model.lazy="msg"  ></inp>
+			{{msg}}
+		</div>
+		
+	</body>
+
+	<script type="text/javascript">
+	function jj(){
+		var a=b=1;
+	
+		
+	}
+	jj();
+	console.log(b)
+//	console.log(a)
+//new Vue({
+//el: '#demo',
+//data: {
+//  show: true
+//}
+//})
+uu="jkdfhsjk"
+console.log(uu.charAt(0).toUpperCase());
+console.log(uu)
+Vue.component("inp",{
+	template:'<input type="text" @input="gg($event)" v-model="kk"/>',
+	props:["value"],
+	data:function(){
+	return    {kk:this.value}
+	},
+	methods:{
+		gg(e){
+			this.$emit("input",e.target.value)
+		}
+	}
+	
+})
+new Vue({
+	data:{
+		
+		msg:"hehe"
+	}
+	
+}).$mount("#rr")
+				
+new Vue({
+			el: "#app",
+			data: {
+				src: [
+				"img/3_lkef_570x273_90.jpg",
+				"img/4_zjip_570x273_90.jpg",
+				"img/4iphone80k680X326_payn_570x273_90.jpg"
+				]
+		
+
+			}
+
+		})
+	new Vue({
+			el: "#gg",
+			data: {
+				src: [
+				"img/3_lkef_570x273_90.jpg",
+				"img/4_zjip_570x273_90.jpg",
+				"img/4iphone80k680X326_payn_570x273_90.jpg"
+				]
+		
+
+			}
+
+		})
+		
+
+		console.log(Vue.component.transition)
+		
+	</script>
+
+</html>

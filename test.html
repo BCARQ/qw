@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="vueyanfa.js">
+		</script>
+		<style type="text/css">
+			#app {
+				width: 100%;
+				height: 800px;
+				/*border: 1px solid red;*/
+				background: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<swiper height="500px" width="999px" :url="src" rain="true">
+			</swiper>
+
+		</div>
+		<div id="gg">
+			<swiper height="200px" width="100%" :url="src" rain="true">
+				<swiper>
+
+		</div>
+		<a href=""></a>
+	</body>
+	<script type="text/javascript">
+		(function() {
+			var _DAFAULT_ = {
+
+				rain: {
+					position: "absolute",
+					width: "50%",
+					right: "25%",
+					zIndex: 2,
+					bottom: 10 + 'px',
+					border: "1px solid red",
+					textAlign: 'center'
+				},
+				rains: {
+					marginLeft: 5 + 'px',
+					marginRight: 5 + 'px',
+					display: 'inline-block',
+					width: 20 + 'px',
+					height: 20 + 'px',
+					borderRadius: ' 50% ',
+					background: 'green',
+					textAlign: 'center',
+					color: 'white',
+					cursor: 'pointer'
+
+				}
+
+			}
+
+			Vue.component("swiper", {
+				props: ["url", "height", "width", "rain"],
+
+				template: '<div class="wrap" v-bind:style="{height:height,width:width,overflow:hide,position:posi,zIndex:0}"> <div class="btn" :style="rainStyle"><div v-for="item in url" :style="rainsStyle"></div></div><div class="middle" v-bind:style="{height:height,width:width}"><a href="" v-for="item in url" :style="astyle" ><img   :src="item" v-bind:style="{height:height,width:width}"/></a></div></div>',
+				data: function() {
+
+					return {
+						hide: "hidden",
+						posi: "relative",
+						astyle:{
+							border: "1px solid red",
+							display: "block",
+							position: "absolute",
+							top: 0,
+							let: 0,
+							display: "none",
+							width:this.width
+
+						},
+						rainStyle: _DAFAULT_.rain,
+						rainsStyle: _DAFAULT_.rains,
+					}
+				},
+				methods: {
+					next() {
+						var sws = this.$el.querySelectorAll("a");
+						var btn = this.$el.querySelectorAll(".btn>div");
+						var swsImg = this.$el.querySelectorAll("a>img");
+						var g = 0;
+						sws[0].style.display = "block"
+						btn[0].style.background = "red";
+						setInterval(function() {
+							for(let i = 0; i < sws.length; i++) {
+								sws[i].style.display = "none"
+								btn[i].style.background = "green"
+							};
+							g++;
+							if(g > sws.length - 1) {
+								g = 0;
+							}
+							sws[g].style.display = "block";
+							btn[g].style.background = "red";
+
+						}, 2000)
+
+					},
+
+				},
+				mounted: function() {
+					this.next()
+				}
+			})
+		})(this)
+
+		new Vue({
+			el: "#app",
+			data: {
+				src: [
+					"img/3_lkef_570x273_90.jpg",
+					"img/4_zjip_570x273_90.jpg",
+					"img/4iphone80k680X326_payn_570x273_90.jpg"
+				]
+			}
+		})
+		new Vue({
+			el: "#gg",
+			data: {
+				src: [
+//					"img/3_lkef_570x273_90.jpg",
+					"img/4_zjip_570x273_90.jpg",
+					"img/4iphone80k680X326_payn_570x273_90.jpg"
+				]
+			}
+		})
+	</script>
+	<!--<script>
+		var wrap = document.querySelector(".wrap");
+		var next = document.querySelector(".arrow_right");
+		var prev = document.querySelector(".arrow_left");
+		next.onclick = function() {
+			next_pic();
+		}
+		prev.onclick = function() {
+			prev_pic();
+		}
+
+		function next_pic() {
+			index++;
+			if(index > 4) {
+				index = 0;
+			}
+			showCurrentDot();
+			var newLeft;
+			if(wrap.style.left === "-3600px") {
+				newLeft = -1200;
+			} else {
+				newLeft = parseInt(wrap.style.left) - 600;
+			}
+			wrap.style.left = newLeft + "px";
+		}
+
+		function prev_pic() {
+			index--;
+			if(index < 0) {
+				index = 4;
+			}
+			showCurrentDot();
+			var newLeft;
+			if(wrap.style.left === "0px") {
+				newLeft = -2400;
+			} else {
+				newLeft = parseInt(wrap.style.left) + 600;
+			}
+			wrap.style.left = newLeft + "px";
+		}
+		var timer = null;
+
+		function autoPlay() {
+			timer = setInterval(function() {
+				next_pic();
+			}, 2000);
+		}
+		autoPlay();
+
+		var container = document.querySelector(".container");
+		container.onmouseenter = function() {
+			clearInterval(timer);
+		}
+		container.onmouseleave = function() {
+			autoPlay();
+		}
+
+		var index = 0;
+		var dots = document.getElementsByTagName("span");
+
+		function showCurrentDot() {
+			for(var i = 0, len = dots.length; i < len; i++) {
+				dots[i].className = "";
+			}
+			dots[index].className = "on";
+		}
+
+		for(var i = 0, len = dots.length; i < len; i++) {
+			(function(i) {
+				dots[i].onclick = function() {
+					var dis = index - i;
+					if(index == 4 && parseInt(wrap.style.left) !== -3000) {
+						dis = dis - 5;
+					}
+					//和使用prev和next相同，在最开始的照片5和最终的照片1在使用时会出现问题，导致符号和位数的出错，做相应地处理即可
+					if(index == 0 && parseInt(wrap.style.left) !== -600) {
+						dis = 5 + dis;
+					}
+					wrap.style.left = (parseInt(wrap.style.left) + dis * 600) + "px";
+					index = i;
+					showCurrentDot();
+				}
+			})(i);
+		}
+	</script>-->
+<script type="text/javascript">
+	var gg="定星盘3456"
+	var j=gg.slice(1,3)
+	console.log(j)
+
+</script>
+</html>
